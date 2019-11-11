@@ -3,33 +3,40 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     cache: false #防止页面修改后重启项目
-  datasource:
-    url: jdbc:mysql://127.0.0.1/bf?serverTimezone=UTC&characterEncoding=utf-8&userSSL=false
+  #  datasource:
+  #    url: jdbc:mysql://127.0.0.1/fcsale?serverTimezone=UTC&characterEncoding=utf-8&userSSL=false
+  #    username: root
+  #    password: 123
+  #    driver-class-name: com.mysql.jdbc.Driver
+
+  druid:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1/fcsale?serverTimezone=UTC&characterEncoding=utf-8&userSSL=false
     username: root
     password: 123
-    driver-class-name: com.mysql.jdbc.Driver
+    maxActive: 30
+    minIdle: 5
+    maxWait: 100000
+    #mysql 8小时 的问题
+    validationQuery: SELECT 'x'
+    timeBetweenEvictionRunsMillis: 600000
+    minEvictableIdleTimeMillis: 3000000
 
-    druid:
-      driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1/bf?serverTimezone=UTC&characterEncoding=utf-8&userSSL=false
-      userame: root
-      password: 123
-      maxActive: 30
-      minIdle: 5
-      maxWait: 5
-      #mysql 8小时 的问题
-      validationQuery: SELECT 'x'
-      timeBetweenEvictionRunsMillis: 60000
-      minEvictableIdleTimeMillis: 30000
-
-# mybatis
+  freemarker:
+    content-type: text/html;charset=UTF-8
+    charset: UTF-8
+    expose-request-attributes: true
+    expose-session-attributes: true
+    expose-spring-macro-helpers: true
+    suffix: .ftl
+#    settings:
+#      datetime_format:
+#        - yyyy-MM-dd HH:mm:ss
+#      default_encoding:
+#        - UTF-8
+# mybatis, 这个没配置好，报 Error parsing Mapper XML. Cause: java.lang.NullPointerException
 mybatis:
-  type-aliases-package: com.luo.miaosha.dao
-  configuration:
-    map-underscore-to-camel-case: true
-    default-fetch-size: 100
-    default-statement-timeout: 5000
-  mapper-locations: classpath:mybatis/mybatis-config.xml
+  config-location: classpath:/mybatis/mybatis-config.xml
 
 
 # redis
