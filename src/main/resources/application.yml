@@ -9,6 +9,18 @@ spring:
     password: 123
     driver-class-name: com.mysql.jdbc.Driver
 
+    druid:
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1/bf?serverTimezone=UTC&characterEncoding=utf-8&userSSL=false
+      userame: root
+      password: 123
+      maxActive: 30
+      minIdle: 5
+      maxWait: 5
+      #mysql 8小时 的问题
+      validationQuery: SELECT 'x'
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 30000
 
 # mybatis
 mybatis:
