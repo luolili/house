@@ -13,5 +13,12 @@
       <!-- 事务超时-->
       <setting name="defaultStatementTimeout" value="600"/>
   </settings>
-    
+
+    <typeAliases>
+        <typeAlias type="com.luo.house.common.model.User" alias="user"></typeAlias>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="mapper/user.xml"></mapper>
+    </mappers>
 </configuration>
