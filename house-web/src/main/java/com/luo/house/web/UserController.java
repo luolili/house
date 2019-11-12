@@ -16,8 +16,15 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("accounts/register")
-    public void accountRegister(User account, ModelMap modelMap) {
+    public String accountRegister(User account, ModelMap modelMap) {
 
+        if (account == null || account.getName() == null) {
+            return "/user/account/register";//到注册页
+        }
+        //验证
+
+
+        return null;
 
     }
 }
