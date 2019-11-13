@@ -17,7 +17,7 @@ public class User {
     private Date createTime;
     private Integer enable;
     private String avator;
-    private MultipartFile avatorFiel;
+    private MultipartFile avatorFile;
     private String newPassword;
     private String key;
     private Integer agencyId;

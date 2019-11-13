@@ -3,3 +3,31 @@ mybatis:
 
 file:
   path: /User/luo/imgs
+domain:
+  name: 127.0.0.1:8080
+spring:
+  druid:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1/fcsale?serverTimezone=UTC&characterEncoding=utf-8&userSSL=false
+    username: root
+    password: 123
+    maxActive: 30
+    minIdle: 5
+    maxWait: 20000
+    validationQuery: SELECT 'x'
+    timeBetweenEvictionRunsMillis: 600000
+    minEvictableIdleTimeMillis: 300000
+
+  mail:
+    host: smtp.qq.com
+    username: 2084267015@qq.com
+    password: ndxpwpeuormdejbe
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttles:
+            enable: true
+            required: true
+
+

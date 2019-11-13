@@ -11,6 +11,13 @@
 
     <groupId>com.luo</groupId>
     <artifactId>house-common</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.1</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

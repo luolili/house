@@ -8,4 +8,12 @@ import java.util.List;
 public interface UserMapper {
 
     List<User> selectUsers();
+
+    int insert(User account);
+
+
+    int delete(String value);
+
+
+
 }
