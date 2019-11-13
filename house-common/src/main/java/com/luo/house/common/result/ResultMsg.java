@@ -1,8 +1,11 @@
 package com.luo.house.common.result;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
 import lombok.Data;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Map;
 
 @Data
@@ -13,13 +16,17 @@ public class ResultMsg {
     private String errorMsg;
     private String successMsg;
 
-    public ResultMsg errorMsg(String msg) {
+    public boolean isSuccess() {
+        return errorMsg == null;
+    }
+
+    public static ResultMsg errorMsg(String msg) {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setErrorMsg(msg);
         return resultMsg;
     }
 
-    public ResultMsg successMsg(String msg) {
+    public static ResultMsg successMsg(String msg) {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setSuccessMsg(msg);
         return resultMsg;
@@ -31,6 +38,22 @@ public class ResultMsg {
         map.put(successMsgKey, successMsg);
         return map;
 
+    }
+
+    public String asUrlParams() {
+        Map<String, String> map = asMap();
+        Map<String, String> newMap = Maps.newHashMap();
+
+        map.forEach((k, v) -> {
+            if (k != null) {
+                try {
+                    newMap.put(k, URLEncoder.encode(v, "utf-8"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return Joiner.on("&").useForNull("").withKeyValueSeparator("=").join(newMap);
     }
 
 
