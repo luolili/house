@@ -66,8 +66,14 @@ public class UserService {
         return null;
     }
 
+    @Value("${file.prefix}")
+    private String filePrefix;
     private List<User> getUserByQuery(User user) {
+        List<User> list = userMapper.selectUsersByQuery(user);
 
-        return userMapper.selectUsersByQuery(user);
+        list.forEach(i -> {
+            i.setAvator(filePrefix + i.getAvator());
+        });
+        return list;
     }
 }

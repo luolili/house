@@ -82,6 +82,12 @@ public class UserController {
 
     }
 
+    @GetMapping("accounts/logout")
+    public String logout(HttpServletRequest req) {
+        HttpSession session = req.getSession(true);
+        session.invalidate();
+        return "redirect:/index";
 
+    }
 
 }

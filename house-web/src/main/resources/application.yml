@@ -3,6 +3,7 @@ mybatis:
 
 file:
   path: /User/luo/imgs
+  prefix: http:127.0.0.1:8080/imgs
 domain:
   name: 127.0.0.1:8080
 spring:
