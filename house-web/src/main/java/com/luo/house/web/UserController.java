@@ -44,4 +44,19 @@ public class UserController {
         mailService.sendMail("test", "00", "2084267015@qq.com");
         return userService.getUsers();
     }
+
+    @GetMapping("get")
+    public String verify(String key) {
+        mailService.sendMail("test", "00", "2084267015@qq.com");
+        boolean result = userService.enable(key);
+
+        if (result) {
+            return "redirect:/index?" + ResultMsg.successMsg("激活成功").asUrlParams();
+        } else {
+            return "redirect:/accounts/register?" + ResultMsg.errorMsg("激活失败").asUrlParams();
+        }
+    }
+
+
+
 }

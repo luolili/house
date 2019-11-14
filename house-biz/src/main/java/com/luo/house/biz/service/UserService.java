@@ -35,13 +35,9 @@ public class UserService {
 
     @Transactional(rollbackFor = Exception.class)
     public boolean addAccount(User account) {
-
         String encryPassword = HashUtils.encryPassword(account.getPasswd());
-
         account.setPasswd(encryPassword);
-
         List<String> imgList = fileService.getImgPath(Lists.newArrayList(account.getAvatorFile()));
-
         if (!CollectionUtils.isEmpty(imgList)) {
             account.setAvator(imgList.get(0));
 
@@ -50,36 +46,18 @@ public class UserService {
         BeanHelper.onInsert(account);
         account.setEnable(0);
         userMapper.insert(account);
-        registerNotify(account.getEmail());
+        mailService.registerNotify(account.getEmail());
 
-        return false;
+        return true;
 
     }
 
-    private Cache<String, String> registerCache = CacheBuilder
-            .newBuilder()
-            .maximumSize(100)//并发量100
-            .expireAfterAccess(10, TimeUnit.MINUTES)
-            .removalListener(new RemovalListener<String, String>() {
 
-                @Override
-                public void onRemoval(RemovalNotification<String, String> notification) {
-                    userMapper.delete(notification.getValue());
-                }
-            }).build();
 
-    @Value("${domain.name}")
-    private String domainName;
     @Autowired
     MailService mailService;
 
-    //异步发送email,因为发送 email 比较慢
-    @Async
-    public void registerNotify(String email) {
-
-        String randomKey = RandomStringUtils.randomAlphabetic(10);
-        registerCache.put(randomKey, email);
-        String url = "http://" + domainName + "/accounts/verify?key" + randomKey;
-        mailService.sendMail("test", url, email);
+    public boolean enable(String key) {
+        return mailService.enable(key);
     }
 }
