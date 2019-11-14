@@ -18,4 +18,7 @@ public interface UserMapper {
     int update(User updateUser);
 
 
+    List<User> selectUsersByQuery(User user);
+
+
 }

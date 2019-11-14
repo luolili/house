@@ -1,21 +1,17 @@
 package com.luo.house.biz.service;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
 import com.google.common.collect.Lists;
 import com.luo.house.biz.mapper.UserMapper;
 import com.luo.house.common.model.User;
 import com.luo.house.common.utils.BeanHelper;
 import com.luo.house.common.utils.HashUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +20,8 @@ import java.util.concurrent.TimeUnit;
 public class UserService {
     @Autowired
     UserMapper userMapper;
-
+    @Autowired
+    MailService mailService;
     @Autowired
     FileService fileService;
 
@@ -52,12 +49,25 @@ public class UserService {
 
     }
 
-
-
-    @Autowired
-    MailService mailService;
-
     public boolean enable(String key) {
         return mailService.enable(key);
+    }
+
+    public User auth(String username, String password) {
+        User user = new User();
+        user.setEmail(username);
+        user.setPasswd(HashUtils.encryPassword(password));
+        user.setEnable(1);
+        List<User> list = getUserByQuery(user);
+        if (CollectionUtils.isNotEmpty(list)) {
+            return list.get(0);
+        }
+
+        return null;
+    }
+
+    private List<User> getUserByQuery(User user) {
+
+        return userMapper.selectUsersByQuery(user);
     }
 }
