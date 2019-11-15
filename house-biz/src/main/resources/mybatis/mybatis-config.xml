@@ -31,8 +31,8 @@
 
     <mappers>
         <mapper resource="mapper/user.xml"/>
+        <mapper resource="mapper/house.xml"/>
         <!--  <mapper resource="mapper/blog.xml"/>
-          <mapper resource="mapper/house.xml"/>
           <mapper resource="mapper/comment.xml"/>
           <mapper resource="mapper/agency.xml"/>-->
     </mappers>

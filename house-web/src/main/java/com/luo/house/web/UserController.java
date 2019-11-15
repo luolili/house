@@ -7,17 +7,18 @@ import com.luo.house.common.model.User;
 import com.luo.house.common.result.ResultMsg;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping
 public class UserController {
 
@@ -44,6 +45,7 @@ public class UserController {
     MailService mailService;
 
     @GetMapping("get")
+    @ResponseBody
     public List<User> get() {
         mailService.sendMail("test", "00", "2084267015@qq.com");
         return userService.getUsers();
@@ -61,7 +63,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("accounts/sigin")
+    @GetMapping("accounts/signin")
     public String login(HttpServletRequest req) {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
@@ -90,4 +92,18 @@ public class UserController {
 
     }
 
+    @GetMapping("accounts/profile")
+    public String profile(User user, ModelMap modelMap, HttpServletRequest req) {
+        if (user.getEmail() == null) {
+            return "redirect:/user/accounts/profile";
+        }
+        //更新
+        userService.updateUser(user, user.getEmail());
+        User newUser = new User();
+        newUser.setEmail(user.getEmail());
+        List<User> list = userService.getUserByQuery(newUser);
+        req.getSession().setAttribute("user", list.get(0));
+        return "redirect:/user/accounts/profile?" + ResultMsg.successMsg("更新成功").asUrlParams();
+
+    }
 }

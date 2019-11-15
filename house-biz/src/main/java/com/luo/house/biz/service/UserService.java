@@ -68,12 +68,20 @@ public class UserService {
 
     @Value("${file.prefix}")
     private String filePrefix;
-    private List<User> getUserByQuery(User user) {
+
+    public List<User> getUserByQuery(User user) {
         List<User> list = userMapper.selectUsersByQuery(user);
 
         list.forEach(i -> {
             i.setAvator(filePrefix + i.getAvator());
         });
         return list;
+    }
+
+    public void updateUser(User user, String email) {
+
+        user.setEmail(email);
+        BeanHelper.onUpdate(user);
+        userMapper.update(user);
     }
 }
