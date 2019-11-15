@@ -1,5 +1,8 @@
 package com.luo.house.common.page;
 
+import lombok.Data;
+
+@Data
 public class PageParams {
 
     public static final Integer PAGE_SIZE = 2;

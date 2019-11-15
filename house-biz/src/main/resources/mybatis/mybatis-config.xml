@@ -16,11 +16,11 @@
 
     <typeAliases>
         <typeAlias type="com.luo.house.common.model.User" alias="user"/>
+        <typeAlias type="com.luo.house.common.model.House" alias="house"/>
+        <typeAlias type="com.luo.house.common.model.Community" alias="community"/>
         <!-- <typeAlias type="com.luo.house.common.model.Agency" alias="agency"/>
-         <typeAlias type="com.luo.house.common.model.House" alias="house"/>
          <typeAlias type="com.luo.house.common.model.City" alias="city"/>
          <typeAlias type="com.luo.house.common.model.Comment" alias="comment"/>
-         <typeAlias type="com.luo.house.common.model.Community" alias="community"/>
          <typeAlias type="com.luo.house.common.model.HouseUser" alias="houseUser"/>
          <typeAlias type="com.luo.house.common.model.Blog" alias="blog"/>
          <typeAlias type="com.luo.house.common.model.User" alias="user"/>

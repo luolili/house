@@ -26,7 +26,7 @@ public class House {
     private String tags;
     private Date createTime;
     private Integer cityId;
-    private Integer communityId;
+    private Long communityId;
     private List<String> imageList = Lists.newArrayList();
     private List<String> floorPlanList = Lists.newArrayList();
 

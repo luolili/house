@@ -1,5 +1,6 @@
 package com.luo.house.biz.mapper;
 
+import com.luo.house.common.model.Community;
 import com.luo.house.common.model.House;
 import com.luo.house.common.model.User;
 import com.luo.house.common.page.PageParams;
@@ -25,6 +26,9 @@ public interface HouseMapper {
 
 
     List<User> selectUsersByQuery(User user);
+
+
+    List<Community> selectCommunity(Community communinty);
 
 
 }
