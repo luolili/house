@@ -12,6 +12,46 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * spring actuator:
+ * 1.http://localhost:8080/health
+ * {
+ * status: "UP",
+ * mail: {
+ * status: "UP",
+ * location: "smtp.qq.com:-1"
+ * },
+ * diskSpace: {
+ * status: "UP",
+ * total: 123179659264,
+ * free: 88003624960,
+ * threshold: 10485760
+ * },
+ * db: {
+ * status: "UP",
+ * database: "MySQL",
+ * hello: 1
+ * }
+ * }
+ * <p>
+ * 2.http://localhost:8080/beans
+ * {
+ * bean: "authActionInterceptor",
+ * aliases: [ ],
+ * scope: "singleton",
+ * type: "com.luo.house.interceptor.AuthActionInterceptor",
+ * resource: "file [F:/githubpro/house/house-web/target/classes/com/luo/house/interceptor/AuthActionInterceptor.class]",
+ * dependencies: [ ]
+ * }
+ * <p>
+ * 3.http://localhost:8080/autoconfig
+ * 4.http://localhost:8080/dump 当前的运行状态
+ * 5.http://localhost:8080/configprops
+ * 6.http://localhost:8080/env
+ * 7.http://localhost:8080/mappings
+ * 8.http://localhost:8080/metrics
+ * 9.http://localhost:8080/trace 访问记录
+ */
 @Controller
 @RequestMapping
 public class HouseController {
@@ -42,9 +82,8 @@ public class HouseController {
 
     @PostMapping("house/leaveMsg")
     public String leaveMsg(UserMsg userMsg, ModelMap modelMap) {
-
         houseService.addUserMsg(userMsg);
-        return "/house/detail";
+        return "/house/leaveMsg";
     }
 
 }

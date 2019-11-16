@@ -31,4 +31,5 @@ spring:
             enable: true
             required: true
 
-
+management:
+  port: 8082 # 只给内部系统访问的 actuator信息

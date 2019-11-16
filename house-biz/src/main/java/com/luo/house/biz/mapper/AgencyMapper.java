@@ -1,6 +1,6 @@
 package com.luo.house.biz.mapper;
 
-import com.luo.house.common.model.Community;
+import com.luo.house.common.model.Agency;
 import com.luo.house.common.model.House;
 import com.luo.house.common.model.User;
 import com.luo.house.common.page.PageParams;
@@ -16,7 +16,7 @@ public interface AgencyMapper {
 
     Long selectPageCount(@Param("house") House house);
 
-    int insert(User account);
+    int insert(Agency agency);
 
 
     int delete(String value);
@@ -25,10 +25,10 @@ public interface AgencyMapper {
     int update(User updateUser);
 
 
-    List<User> selectUsersByQuery(User user);
+    List<Agency> select(Agency agency);
 
 
-    List<Community> selectCommunity(Community communinty);
+    Long selectAgentCount(@Param("user") User user);
 
 
 }
