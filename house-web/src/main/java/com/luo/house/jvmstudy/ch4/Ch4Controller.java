@@ -14,6 +14,22 @@ public class Ch4Controller {
         return name + "halo";
     }
 
+    @RequestMapping("/arg2")
+    public String test(@RequestParam("name") String name, @RequestParam("id") int id) {
+        return name + "halo" + "," + id;
+    }
+
+    @RequestMapping("/exception")
+    public String exception() {
+        try {
+            System.out.println("--");
+            System.out.println(1 / 0);
+            System.out.println("--");
+        } catch (Exception e) {
+//ex没有跑出来
+        }
+        return "halo";
+    }
     @RequestMapping("/constructor")
     public User constructor(User user) {
         return user;
