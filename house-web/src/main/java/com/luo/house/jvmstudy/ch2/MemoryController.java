@@ -39,7 +39,9 @@ public class MemoryController {
      * Dumping heap to C:\Users\Administrator\Desktop\heap.hprof ...
      * Heap dump file created
      * 在桌面有一个 文件： heap.hprof
-     * C:\Users\Administrator\Desktop>
+     *
+     * 如何分析这个文件？ 用mat:Memory Analyzer tool
+     *
      */
     @GetMapping("/heap")
     public String heap() {
