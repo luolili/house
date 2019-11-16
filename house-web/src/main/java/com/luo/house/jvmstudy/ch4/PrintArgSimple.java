@@ -15,14 +15,16 @@ import com.sun.btrace.annotations.ProbeMethodName;
  * f:
  * dir
  * jps -l 查看 pid
+ * btrace pid PrintArgSimple.java
+ * 结果 会打印到控制台:cmd
  */
 @BTrace
 public class PrintArgSimple {
-    //拦截 test方法
+    // 字节码层面 拦截 test方法：普通方法
     @OnMethod(
             clazz = "com.luo.house.jvmstudy.ch4.Ch4Controller",
             method = "test",
-            location = @Location(Kind.ENTRY)
+            location = @Location(Kind.ENTRY)//拦截的时候
     )
     public static void anyRead(@ProbeClassName String pcn, @ProbeMethodName String pmn, AnyType[] args) {
         BTraceUtils.printArray(args);
