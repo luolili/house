@@ -30,6 +30,9 @@ spring:
           starttles:
             enable: true
             required: true
-
+  boot:
+    admin:
+      url: http://127.0.0.1:8083 # 监控平台
 management:
-  port: 8082 # 只给内部系统访问的 actuator信息
+  port: 8082 # 只给内部系统访问的 actuator信息,endpoint 端口号
+

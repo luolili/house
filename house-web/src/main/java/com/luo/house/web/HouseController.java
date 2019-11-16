@@ -50,7 +50,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 6.http://localhost:8080/env
  * 7.http://localhost:8080/mappings
  * 8.http://localhost:8080/metrics
- * 9.http://localhost:8080/trace 访问记录
+ * 9.http://localhost:8080/trace 访问记录 /info , /shutdown
  */
 @Controller
 @RequestMapping

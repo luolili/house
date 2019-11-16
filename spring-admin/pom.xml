@@ -10,19 +10,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.luo</groupId>
-    <artifactId>house-web</artifactId>
+    <artifactId>spring-admin</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>com.luo</groupId>
-            <artifactId>house-biz</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <!-- admin client-->
+        <!-- admin server-->
         <dependency>
             <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <artifactId>spring-boot-admin-server</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server-ui</artifactId>
             <version>1.5.2</version>
         </dependency>
     </dependencies>
