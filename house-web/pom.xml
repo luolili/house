@@ -25,6 +25,12 @@
             <artifactId>spring-boot-admin-starter-client</artifactId>
             <version>1.5.2</version>
         </dependency>
+        <!-- geerate Class file-->
+        <dependency>
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>3.3.1</version>
+        </dependency>
     </dependencies>
 
 </project>
