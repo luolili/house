@@ -3,7 +3,6 @@ package com.luo.house.biz.mapper;
 import com.luo.house.common.model.Community;
 import com.luo.house.common.model.House;
 import com.luo.house.common.model.User;
-import com.luo.house.common.model.UserMsg;
 import com.luo.house.common.page.PageParams;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -11,9 +10,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface HouseMapper {
+public interface AgencyMapper {
 
-    List<House> selectPageHouses(@Param("house") House house, @Param("pageParams") PageParams pageParams);
+    List<User> selectAgent(@Param("user") User user, @Param("pageParams") PageParams pageParams);
 
     Long selectPageCount(@Param("house") House house);
 
@@ -30,9 +29,6 @@ public interface HouseMapper {
 
 
     List<Community> selectCommunity(Community communinty);
-
-
-    void insertUserMsg(UserMsg userMsg);
 
 
 }

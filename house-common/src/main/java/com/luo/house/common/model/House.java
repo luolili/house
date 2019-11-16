@@ -33,6 +33,7 @@ public class House {
     private List<MultipartFile> houseFiles;
     private List<MultipartFile> floorPlanFiles;
     private Long userId;
+    private String sort = "time_desc";
 
     private boolean bookmarked;
     private Integer status;

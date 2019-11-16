@@ -3,6 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <typeAliases>
+        <typeAlias type="com.luo.house.common.model.User" alias="user"/>
+        <typeAlias type="com.luo.house.common.model.House" alias="house"/>
+        <typeAlias type="com.luo.house.common.model.Community" alias="community"/>
+        <typeAlias type="com.luo.house.common.model.Agency" alias="agency"/>
+        <!--  <typeAlias type="com.luo.house.common.model.City" alias="city"/>
+         <typeAlias type="com.luo.house.common.model.Comment" alias="comment"/>
+         <typeAlias type="com.luo.house.common.model.HouseUser" alias="houseUser"/>
+         <typeAlias type="com.luo.house.common.model.Blog" alias="blog"/>
+         <typeAlias type="com.luo.house.common.model.User" alias="user"/>
+         <typeAlias type="com.luo.house.common.model.UserMsg" alias="userMsg"/>
+         <typeAlias type="com.luo.house.common.model.HouseUser" alias="houseUser"/>
+ -->
+    </typeAliases>
+
+
     <settings>
         <!-- 配置关闭缓存  -->
         <setting name="cacheEnabled" value="false"/>
@@ -12,22 +28,6 @@
         <!-- 事务超时时间 -->
         <setting name="defaultStatementTimeout" value="600"/>
     </settings>
-
-
-    <typeAliases>
-        <typeAlias type="com.luo.house.common.model.User" alias="user"/>
-        <typeAlias type="com.luo.house.common.model.House" alias="house"/>
-        <typeAlias type="com.luo.house.common.model.Community" alias="community"/>
-        <!-- <typeAlias type="com.luo.house.common.model.Agency" alias="agency"/>
-         <typeAlias type="com.luo.house.common.model.City" alias="city"/>
-         <typeAlias type="com.luo.house.common.model.Comment" alias="comment"/>
-         <typeAlias type="com.luo.house.common.model.HouseUser" alias="houseUser"/>
-         <typeAlias type="com.luo.house.common.model.Blog" alias="blog"/>
-         <typeAlias type="com.luo.house.common.model.User" alias="user"/>
-         <typeAlias type="com.luo.house.common.model.UserMsg" alias="userMsg"/>
-         <typeAlias type="com.luo.house.common.model.HouseUser" alias="houseUser"/>
- -->
-    </typeAliases>
 
     <mappers>
         <mapper resource="mapper/user.xml"/>

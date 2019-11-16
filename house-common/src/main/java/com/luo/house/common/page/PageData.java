@@ -1,8 +1,11 @@
 package com.luo.house.common.page;
 
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class PageData<T> {
     List<T> list;
 
