@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * btrace默认是本地运行,被修改的字节码不会被还原
+ */
 @RestController
 @RequestMapping("ch4")
 public class Ch4Controller {
@@ -30,6 +33,7 @@ public class Ch4Controller {
         }
         return "halo";
     }
+
     @RequestMapping("/constructor")
     public User constructor(User user) {
         return user;
