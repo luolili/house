@@ -41,5 +41,12 @@ public class MyMailServiceTest {
         myMailService.sendFilesMail("2084267015@qq.com", "this is  mail with file 附件", content, filePath);
     }
 
+    @Test
+    public void testInlineMail() throws MessagingException {
+        String filePath = "F:\\迅雷下载\\Java深入微服务原理改造房产销售平台\\课程资料\\本课程微服务技术选型.png";
+        String rscId = "test001";
+        String content = "<html><body> halo world html img: <img src=\'cid:" + rscId + " \'" + "</img>" + "</body></html>";
+        myMailService.sendInlineResourceMail("2084267015@qq.com", " mail with file inline 图片", content, filePath, rscId);
+    }
 
 }

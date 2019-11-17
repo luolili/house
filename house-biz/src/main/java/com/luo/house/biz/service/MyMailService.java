@@ -97,5 +97,18 @@ public class MyMailService {
         javaMailSender().send(message);
     }
 
+    public void sendInlineResourceMail(String to, String subject, String text, String rscPath, String rscId) throws MessagingException {
+        MimeMessage message = javaMailSender().createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setFrom(from);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(text, true);
+        //spring.io
+        FileSystemResource resource = new FileSystemResource(new File(rscPath));
+        helper.addInline(rscId, resource);//在正文 里面加图片
+        javaMailSender().send(message);
+    }
+
 
 }
