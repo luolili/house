@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
@@ -47,6 +49,19 @@ public class MyMailServiceTest {
         String rscId = "test001";
         String content = "<html><body> halo world html img: <img src=\'cid:" + rscId + " \'" + "</img>" + "</body></html>";
         myMailService.sendInlineResourceMail("2084267015@qq.com", " mail with file inline 图片", content, filePath, rscId);
+    }
+
+
+    @Resource
+    TemplateEngine templateEngine;
+
+    @Test
+    public void testTemplateMail() throws MessagingException {
+        Context context = new Context();
+        context.setVariable("id", "001");
+        String content = "";
+        String mailContent = templateEngine.process("mailTemplate", context);
+        myMailService.sendHtmlMail("2084267015@qq.com", " mail with template", mailContent);
     }
 
 }
