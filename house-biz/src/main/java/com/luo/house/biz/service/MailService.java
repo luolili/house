@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -22,6 +21,8 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class MailService {
+    @Value("${domain.name}")
+    private String domainName;
     @Bean(name = "javaMailSender")
     public JavaMailSenderImpl javaMailSender() {
         // 默认配置相关
@@ -72,13 +73,10 @@ public class MailService {
 
     }
 
-    @Value("${domain.name}")
-    private String domainName;
 
     //异步发送email,因为发送 email 比较慢
     @Async
     public void registerNotify(String email) {
-
         String randomKey = RandomStringUtils.randomAlphabetic(10);
         registerCache.put(randomKey, email);
         String url = "http://" + domainName + "/accounts/verify?key" + randomKey;
