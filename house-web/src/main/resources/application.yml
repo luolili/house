@@ -30,6 +30,7 @@ spring:
           starttles:
             enable: true
             required: true
+    default-encoding: UTF-8
   boot:
     admin:
       url: http://127.0.0.1:8083 # 监控平台
