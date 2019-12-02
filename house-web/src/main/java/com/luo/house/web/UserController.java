@@ -27,7 +27,6 @@ public class UserController {
 
     @PostMapping("accounts/register")
     public String accountRegister(User account, ModelMap modelMap) {
-
         if (account == null || account.getName() == null) {
             return "/user/account/register";//到注册页
         }
@@ -51,11 +50,11 @@ public class UserController {
         return userService.getUsers();
     }
 
+    //异步发送email,因为发送 email 比较慢；发送email,点击link 激活
     @GetMapping("accounts/verify")
     public String verify(String key) {
         mailService.sendMail("test", "00", "2084267015@qq.com");
         boolean result = userService.enable(key);
-
         if (result) {
             return "redirect:/index?" + ResultMsg.successMsg("激活成功").asUrlParams();
         } else {
@@ -77,6 +76,7 @@ public class UserController {
             return "redirect:/user/accounts/signin?" + "target=" + target + "&username=" + username
                     + ResultMsg.errorMsg("用户名或密码错误").asUrlParams();
         } else {
+            //session 存放user info
             HttpSession session = req.getSession(true);//强制创建session
             session.setAttribute(CommonConstants.USER_ATTRIBUTE, user);
             return StringUtils.isNoneBlank(target) ? "redirect:" + target : "redirect:/index";

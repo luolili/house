@@ -74,7 +74,7 @@ public class MailService {
     }
 
 
-    //异步发送email,因为发送 email 比较慢
+    //异步发送email,因为发送 email 比较慢；发送email,点击link 激活
     @Async
     public void registerNotify(String email) {
         String randomKey = RandomStringUtils.randomAlphabetic(10);
