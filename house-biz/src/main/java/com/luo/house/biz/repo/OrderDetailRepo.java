@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface OrderDetailRepo extends JpaRepository<OrderDetail, String> {
 
-    List<OrderDetail> findByOrOrderId(String orderId);
+    List<OrderDetail> findByOrderId(String orderId);
 
     Page<OrderMaster> findByBuyerOpenid(String buyerOpenid, Pageable pageable);
 

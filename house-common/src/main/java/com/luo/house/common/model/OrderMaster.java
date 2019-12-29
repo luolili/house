@@ -1,5 +1,7 @@
 package com.luo.house.common.model;
 
+import com.luo.house.common.constants.OrderStatus;
+import com.luo.house.common.constants.PayStatus;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -21,15 +23,13 @@ public class OrderMaster {
     private String buyerAddress;
     private String buyerOpenid;
     private BigDecimal buyerAmount;
-    private Integer orderStatus;
-    private Integer payStatus;
-    private String productIcon;
-    private Integer productStock;
-    private Integer productStatus;//0正常1下架
-    private Integer categoryType;
-    private BigDecimal productPrice;
-
+    private Integer orderStatus = OrderStatus.NEW.getCode();
+    private Integer payStatus = PayStatus.WAIT.getCode();
 
     private Date createTime;
     private Date updateTime;
+
+    //为了展示
+    /*@Transient
+    private List<OrderDetail> orderDetailList;*/
 }
