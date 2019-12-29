@@ -20,6 +20,7 @@ public class ResultMsg {
         return errorMsg == null;
     }
 
+
     public static ResultMsg errorMsg(String msg) {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setErrorMsg(msg);

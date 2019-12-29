@@ -25,6 +25,13 @@
             <artifactId>spring-boot-admin-starter-client</artifactId>
             <version>1.5.2</version>
         </dependency>
+        <!-- open jdk jol 类的内部结构查看-->
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.9</version>
+        </dependency>
+
         <!-- geerate Class file-->
         <dependency>
             <groupId>asm</groupId>

@@ -21,7 +21,7 @@ public class CategoryService {
         return productCategoryRepo.findAll();
 
     }
-    
+
     public List<ProductCategory> getByCategoryTypeList(List<Integer> list) {
         return productCategoryRepo.findByCategoryTypeIn(list);
 
