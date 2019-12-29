@@ -121,7 +121,7 @@ public class OrderService {
         OrderMaster orderMaster = new OrderMaster();
         //查询订单状态
         if (OrderStatus.NEW.getCode().equals(orderDTO.getOrderStatus())) {
-
+            orderDTO.setOrderStatus(OrderStatus.CANCEL.getCode());
             BeanUtils.copyProperties(orderDTO, orderMaster);
             orderMaster.setOrderStatus(OrderStatus.CANCEL.getCode());
             OrderMaster save = orderMasterRepo.save(orderMaster);
