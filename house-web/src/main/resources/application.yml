@@ -9,7 +9,7 @@ domain:
 spring:
   druid:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1/fcsale?serverTimezone=UTC&characterEncoding=utf-8&userSSL=false
+    url: jdbc:mysql://127.0.0.1/sell?serverTimezone=UTC&characterEncoding=utf-8&userSSL=false
     username: root
     password: 123
     maxActive: 30
@@ -36,4 +36,6 @@ spring:
       url: http://127.0.0.1:8083 # 监控平台
 management:
   port: 8082 # 只给内部系统访问的 actuator信息,endpoint 端口号
-
+#logging:
+#  pattern:
+#    console: "%d %msg%n"

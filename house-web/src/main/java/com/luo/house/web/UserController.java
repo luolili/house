@@ -106,4 +106,7 @@ public class UserController {
         return "redirect:/user/accounts/profile?" + ResultMsg.successMsg("更新成功").asUrlParams();
 
     }
+    //--
+
+
 }
