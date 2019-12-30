@@ -66,6 +66,13 @@ public class OrderService {
 
     }
 
+    public Page<OrderDTO> getAll(Pageable pageable) {
+        Page<OrderMaster> page = orderMasterRepo.findAll(pageable);
+        List<OrderDTO> dtoList = OrderMasterToOrderDTOConvertor.convert(page.getContent());
+        PageImpl<OrderDTO> res = new PageImpl<OrderDTO>(dtoList, pageable, page.getTotalElements());
+        return res;
+
+    }
 
     @Transactional
     public OrderDTO save(OrderDTO orderDTO) {
@@ -74,6 +81,7 @@ public class OrderService {
         //查询product
         List<OrderDetail> orderDetailList = genOrderDetail(orderDTO, orderId, totalPrice);
         //写入2条表
+        orderDTO.setOrderId(orderId);
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDTO, orderMaster);
         orderMaster.setOrderId(orderId);
@@ -147,15 +155,34 @@ public class OrderService {
         return orderDTO;
     }
 
-    public OrderDTO finish(OrderMaster orderMaster) {
-
-        return null;
+    @Transactional
+    public OrderDTO finish(OrderDTO orderDTO) {
+        OrderMaster orderMaster = new OrderMaster();
+        if (OrderStatus.NEW.getCode().equals(orderDTO.getOrderStatus())) {
+            orderDTO.setOrderStatus(OrderStatus.FINISHED.getCode());
+            BeanUtils.copyProperties(orderDTO, orderMaster);
+            OrderMaster save = orderMasterRepo.save(orderMaster);
+            if (save == null) {
+                throw new SellException(ResultEnum.UPDATE_ERROR);
+            }
+        }
+        return orderDTO;
 
     }
 
-    public OrderDTO paid(OrderMaster orderMaster) {
-
-        return null;
+    @Transactional
+    public OrderDTO paid(OrderDTO orderDTO) {
+        OrderMaster orderMaster = new OrderMaster();
+        if (OrderStatus.NEW.getCode().equals(orderDTO.getOrderStatus())
+                && PayStatus.WAIT.getCode().equals(orderDTO.getPayStatus())) {
+            orderDTO.setPayStatus(PayStatus.SUCCESS.getCode());
+            BeanUtils.copyProperties(orderDTO, orderMaster);
+            OrderMaster save = orderMasterRepo.save(orderMaster);
+            if (save == null) {
+                throw new SellException(ResultEnum.UPDATE_ERROR);
+            }
+        }
+        return orderDTO;
 
     }
 }

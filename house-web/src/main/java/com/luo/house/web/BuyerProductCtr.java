@@ -33,13 +33,16 @@ public class BuyerProductCtr {
         List<Integer> categoryTypeList = productInfoList.stream()
                 .map(ProductInfo::getCategoryType)
                 .collect(Collectors.toList());
-
         List<ProductCategory> typeList = categoryService.getByCategoryTypeList(categoryTypeList);
         //组装
+        List<ProductVO> productVOList = getProductVOS(productInfoList, typeList);
+        return ResultVO.success(productVOList);
+    }
+
+    private List<ProductVO> getProductVOS(List<ProductInfo> productInfoList, List<ProductCategory> typeList) {
         List<ProductVO> productVOList = new ArrayList<>();
         for (ProductCategory category : typeList) {
             ProductVO productVO = new ProductVO();
-
             productVO.setCategoryName(category.getCategoryName());
             productVO.setCategoryType(category.getCategoryType());
             List<ProductInfoVO> productInfoVOList = new ArrayList<>();
@@ -54,6 +57,6 @@ public class BuyerProductCtr {
             }
             productVOList.add(productVO);
         }
-        return ResultVO.success(productVOList);
+        return productVOList;
     }
 }
