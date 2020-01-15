@@ -12,6 +12,9 @@ public enum ResultEnum {
     PARAM_ERROR(5, "PARAM_ERROR"),
     CART_EMPTY(6, "CART_EMPTY"),
     ORDER_OWNER_ERROR(7, "ORDER_OWNER_ERROR"),
+    //token
+    ILLEGAL_ARG(8, "ILLEGAL_ARG"),
+    REPEATABLE_OPERATION(9, "REPEATABLE_OPERATION"),
     ;
 
     private Integer code;

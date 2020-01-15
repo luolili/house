@@ -1,37 +1,33 @@
 package com.luo.house.web;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.luo.house.biz.dto.OrderDTO;
 import com.luo.house.biz.exception.SellException;
 import com.luo.house.biz.service.CategoryService;
 import com.luo.house.biz.service.OrderService;
 import com.luo.house.biz.service.ProductService;
 import com.luo.house.common.constants.ResultEnum;
-import com.luo.house.common.model.OrderDetail;
 import com.luo.house.common.result.ResultVO;
-import com.luo.house.form.OrderForm;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+/**
+ * 后端用freemarker
+ */
 @Slf4j
-@RestController
-@RequestMapping("buyer/order")
-public class BuyerOrderCtr {
+@Controller
+@RequestMapping("seller/order")
+public class SellerOrderCtr {
 
     @Autowired
     ProductService productService;
@@ -41,41 +37,19 @@ public class BuyerOrderCtr {
     @Autowired
     OrderService orderService;
 
-    @GetMapping("create")
-    public ResultVO create(@Valid OrderForm orderForm) {
-        OrderDTO orderDTO = new OrderDTO();
-        List<OrderDetail> detailList = convert(orderForm, orderDTO);
-        orderDTO.setOrderDetailList(detailList);
-        if (CollectionUtils.isEmpty(detailList)) {
-            log.info("购物车不能为空");
-            throw new SellException(ResultEnum.CART_EMPTY);
-        }
-        OrderDTO save = orderService.save(orderDTO);
-        Map<String, String> map = new HashMap<>();
-        map.put("orderId", save.getOrderId());
-
-        return ResultVO.success(map);
-    }
-
-    private List<OrderDetail> convert(@Valid OrderForm orderForm, OrderDTO orderDTO) {
-        orderDTO.setBuyerName(orderForm.getName());
-        orderDTO.setBuyerPhone(orderForm.getPhone());
-        orderDTO.setBuyerAddress(orderForm.getAdress());
-        orderDTO.setBuyerOpenid(orderForm.getOpenid());
-        ObjectMapper mapper = new ObjectMapper();
-        List<OrderDetail> res = null;
-        try {
-            res = mapper.readValue(orderForm.getItems(), new TypeReference<List<OrderDetail>>() {
-            });
-        } catch (IOException e) {
-            log.info("转换错误");
-            throw new SellException(ResultEnum.PARAM_ERROR);
-        }
-
-        return res;
-    }
-
     @GetMapping("list")
+    public ModelAndView getAll(Integer page, Integer size) {
+
+        PageRequest req = new PageRequest(page - 1, size);
+        Page<OrderDTO> dtos = orderService.getAll(req);
+        Map<String, Object> map = new HashMap<>();
+        map.put("orderDTOPage", dtos.getContent());
+        ModelAndView mv = new ModelAndView("order/list", map);
+        return mv;
+    }
+
+
+    @GetMapping("list1")
     public ResultVO list(@RequestParam String openid,
                          @RequestParam(defaultValue = "0") Integer page,
                          @RequestParam(defaultValue = "10") Integer size) {

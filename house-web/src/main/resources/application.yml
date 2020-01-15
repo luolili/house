@@ -31,14 +31,15 @@ spring:
             enable: true
             required: true
     default-encoding: UTF-8
-  boot:
-    admin:
-      url: http://127.0.0.1:8083 # 监控平台
+      #  boot:
+      #    admin:
+      #      url: http://127.0.0.1:8083 # 监控平台
       #全局配置
   jackson:
     default-property-inclusion: non_null
-management:
-  port: 8082 # 只给内部系统访问的 actuator信息,endpoint 端口号
+#management:
+#  port: 8082 # 只给内部系统访问的 actuator信息,endpoint 端口号
 #logging:
 #  pattern:
+
 #    console: "%d %msg%n"

@@ -2,6 +2,7 @@ package com.luo.house.web;
 
 import com.luo.house.biz.service.AgencyService;
 import com.luo.house.biz.service.HouseService;
+import com.luo.house.common.model.Agency;
 import com.luo.house.common.model.House;
 import com.luo.house.common.model.UserMsg;
 import com.luo.house.common.page.PageData;
@@ -9,8 +10,10 @@ import com.luo.house.common.page.PageParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * spring actuator:
@@ -69,7 +72,7 @@ public class HouseController {
         return "/house/list";
     }
 
-    @PostMapping("house/detail")
+    @GetMapping("house/detail")
     public String detail(Long id, ModelMap modelMap) {
         House house = houseService.queryOneHouse(id);
         if (house.getUserId() != null && house.getUserId().equals(0)) {
@@ -84,6 +87,16 @@ public class HouseController {
     public String leaveMsg(UserMsg userMsg, ModelMap modelMap) {
         houseService.addUserMsg(userMsg);
         return "/house/leaveMsg";
+    }
+
+    /**
+     * 测试 mybatis executor
+     */
+    @GetMapping("agency/detail")
+    @ResponseBody
+    public String agency(Integer id) {
+        Agency agency = agencyService.getAgency(id);
+        return " v";
     }
 
 }

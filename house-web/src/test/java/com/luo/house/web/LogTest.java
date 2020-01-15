@@ -11,4 +11,6 @@ public class LogTest {
         String name = "u";
         log.info("name:[{}]", name);
     }
+
+
 }
